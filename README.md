@@ -15,6 +15,7 @@ Ce projet implémente des **perceptrons** pour contrôler un robot **Thymio II**
 ### Partie 3 : Perceptron Analogique
 - **Comportement proportionnel** : Le robot recule d'autant plus vite que l'obstacle avant est proche
 - Contrôle continu avec valeurs normalisées (0 à 1)
+- Extension 2 entrées : influence différente des capteurs selon les poids \(w_1\) et \(w_2\)
 
 ## 📁 Fichiers du Projet
 
@@ -25,6 +26,7 @@ Ce projet implémente des **perceptrons** pour contrôler un robot **Thymio II**
 | `TP1.py` | Portes logiques OR et AND avec perceptrons | Partie 1 |
 | `TP1_Thymio_Real.py` | Comportements A et B (perceptrons binaires) | Partie 2 |
 | `TP1_Partie3_Analogique.py` | Perceptron analogique (recul proportionnel) | Partie 3 |
+| `TP1_Partie3_Analogique_deux_entrees.py` | Perceptron analogique à 2 entrées (poids différents) | Partie 3 |
 | `test_comportement_A_ET.py` | Test validé du comportement A | Partie 2 |
 
 ### Documentation
@@ -34,6 +36,7 @@ Ce projet implémente des **perceptrons** pour contrôler un robot **Thymio II**
 | `Reponses_TP1.md` | Réponses théoriques (séparabilité linéaire, XOR) |
 | `Partie2_Robot_Thymio.md` | Documentation complète des comportements A et B |
 | `Partie3_Perceptron_Analogique.md` | Documentation du perceptron analogique |
+| `Partie3_Perceptron_Analogique_2_Entrees.md` | Documentation du perceptron analogique à 2 entrées |
 | `README.md` | Ce fichier - guide général |
 
 ## 🔧 Installation
@@ -85,6 +88,15 @@ python TP1_Partie3_Analogique.py
 ```
 
 Le robot recule proportionnellement à la proximité d'un obstacle détecté devant lui.
+
+### Partie 3 (extension) : Perceptron analogique à deux entrées
+
+```powershell
+python TP1_Partie3_Analogique_deux_entrees.py
+```
+
+Le robot combine deux capteurs avant avec des poids différents \(w_1\) et \(w_2\),
+et l'affichage montre que le capteur avec le poids le plus fort influence plus la sortie.
 
 ### Contrôles
 
@@ -151,6 +163,20 @@ Le robot recule proportionnellement à la proximité d'un obstacle détecté dev
 - Réponse proportionnelle au lieu de tout-ou-rien
 - Mouvement fluide au lieu de saccadé
 
+### Partie 3 : Perceptron Analogique (2 entrées)
+
+**Capteurs utilisés** : `prox.horizontal[1]` (gauche) et `prox.horizontal[3]` (droit)
+
+**Modèle** :
+- \(s = w_1 x_1 + w_2 x_2\)
+- \(y = f(s)\) avec sortie continue bornée dans \([0,1]\)
+- Vitesse : \(v = -y \cdot V_{\text{max}}\)
+
+**Illustration demandée** :
+- Avec des poids différents (ex. \(w_1=1.0\), \(w_2=0.4\)),
+- les contributions affichées `w1*x1` et `w2*x2` montrent qu'à distance comparable,
+  le capteur lié au poids le plus fort a une influence plus grande sur la sortie.
+
 ## 🎨 Affichage Console
 
 Le programme affiche l'état en temps réel dans la console :
@@ -191,6 +217,17 @@ CAPTEUR_MAX = 4500  # Valeur max du capteur avant
 
 # Vitesse maximale
 VITESSE_MAX_RECUL = 250  # Vitesse max de recul
+```
+
+Dans `TP1_Partie3_Analogique_deux_entrees.py` :
+
+```python
+# Poids des deux capteurs avant
+W1 = 1.0
+W2 = 0.4
+
+# Vitesse maximale
+VITESSE_MAX_RECUL = 250
 ```
 
 ## 🧪 Tests et Validation
@@ -279,6 +316,7 @@ pip install --upgrade thymiodirect
 | [Reponses_TP1.md](Reponses_TP1.md) | Questions théoriques : séparabilité linéaire, impossibilité du XOR |
 | [Partie2_Robot_Thymio.md](Partie2_Robot_Thymio.md) | Comportements A et B (perceptrons binaires ET) |
 | [Partie3_Perceptron_Analogique.md](Partie3_Perceptron_Analogique.md) | Perceptron analogique, contrôle proportionnel |
+| [Partie3_Perceptron_Analogique_2_Entrees.md](Partie3_Perceptron_Analogique_2_Entrees.md) | Perceptron analogique à 2 entrées et influence des poids |
 
 ### Références externes
 

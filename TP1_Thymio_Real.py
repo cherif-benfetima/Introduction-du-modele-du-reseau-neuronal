@@ -111,7 +111,7 @@ def lire_capteurs_sol(th, node_id):
     capteur_gauche = prox.ground.delta[0]
     capteur_droit = prox.ground.delta[1]
     """
-    # Seuil de détection de surface (à ajuster selon le robot)
+    # Seuil de détection de surface 
     SEUIL_SURFACE = 400
     
     try:
@@ -199,13 +199,13 @@ def appliquer_decision(th, node_id, decision):
         th[node_id]["motor.left.target"] = VITESSE
         th[node_id]["motor.right.target"] = VITESSE
         set_leds(th, node_id, 0, 255, 0)  # LED verte
-        print("🤖 Robot AVANCE")
+        print(" Robot AVANCE")
     else:
         # Arrêter
         th[node_id]["motor.left.target"] = 0
         th[node_id]["motor.right.target"] = 0
         set_leds(th, node_id, 255, 0, 0)  # LED rouge
-        print("🛑 Robot ARRÊTÉ")
+        print(" Robot ARRÊTÉ")
 
 # ============================================================
 # CALLBACK PRINCIPAL
@@ -274,14 +274,14 @@ def callback_observer(node_id, mode='A'):
             if decision == 1:
                 th[node_id]["motor.left.target"] = 150
                 th[node_id]["motor.right.target"] = 150
-                print(" | 🟢 AVANCE")
+                print(" |  AVANCE")
             else:
                 th[node_id]["motor.left.target"] = 0
                 th[node_id]["motor.right.target"] = 0
-                print(" | 🔴 ARRÊTÉ")
+                print(" |  ARRÊTÉ")
                 
         except Exception as e:
-            print(f"❌ Erreur: {e}")
+            print(f" Erreur: {e}")
 
 # ============================================================
 # PROGRAMME PRINCIPAL
@@ -299,11 +299,11 @@ if __name__ == "__main__":
     mode = input("Votre choix (A/B) : ").upper()
     
     if mode not in ['A', 'B']:
-        print("❌ Mode invalide. Utilisation du mode A par défaut.")
+        print(" Mode invalide. Utilisation du mode A par défaut.")
         mode = 'A'
     
-    print(f"\n✅ Mode {mode} sélectionné")
-    print("📌 Appuyez sur le bouton central du Thymio pour arrêter\n")
+    print(f"\n Mode {mode} sélectionné")
+    print(" Appuyez sur le bouton central du Thymio pour arrêter\n")
     
     # Utiliser COM3 (port détecté sur votre système)
     serial_port = "COM3"
@@ -311,7 +311,7 @@ if __name__ == "__main__":
     
     # Connexion au Thymio
     try:
-        print("\n🔄 Connexion au Thymio en cours...")
+        print("\n Connexion au Thymio en cours...")
         coverage = {"prox.horizontal", "prox.ground.delta", "button.center"}
         
         th = Thymio(
@@ -320,13 +320,13 @@ if __name__ == "__main__":
             refreshing_coverage=coverage,
         )
     except Exception as error:
-        print(f"\n❌ Erreur de connexion au Thymio : {error}")
-        print("\n💡 Vérifications à faire :")
+        print(f"\n Erreur de connexion au Thymio : {error}")
+        print("\n Vérifications à faire :")
         print("  1. Le robot Thymio est-il allumé ?")
         print("  2. Le câble USB est-il bien branché ?")
         print("  3. Les drivers Thymio sont-ils installés ?")
         print("  4. Aucun autre programme n'utilise le Thymio ?")
-        print("\n📖 Pour tester sans robot, lancez: python TP1_Thymio.py")
+        print("\n Pour tester sans robot, lancez: python TP1_Thymio.py")
         exit(1)
     
     try:
@@ -336,23 +336,23 @@ if __name__ == "__main__":
         id = th.first_node()
         
         if id is None:
-            print("❌ Aucun nœud Thymio trouvé après connexion")
+            print(" Aucun nœud Thymio trouvé après connexion")
             exit(1)
         
         done = False
         
-        print("✅ Thymio connecté avec succès")
+        print(" Thymio connecté avec succès")
         
         # Configuration de l'observer avec le mode choisi
         th.set_variable_observer(id, lambda node_id: callback_observer(node_id, mode))
         
-        print(f"\n🚀 Thymio en mode {mode} - Exécution en cours...")
+        print(f"\n Thymio en mode {mode} - Exécution en cours...")
         
         if mode == 'A':
-            print("💡 Mode A - Placez vos DEUX MAINS derrière le robot (les deux capteurs)")
+            print(" Mode A - Placez vos DEUX MAINS derrière le robot (les deux capteurs)")
             print("   Le robot avance si LES DEUX capteurs arrière détectent")
         else:
-            print("💡 Mode B - Mettez le robot sur une table")
+            print(" Mode B - Mettez le robot sur une table")
             print("   Le robot avance si LES DEUX capteurs sol détectent la surface")
         
         print("="*60 + "\n")
@@ -362,17 +362,17 @@ if __name__ == "__main__":
             while not done:
                 time.sleep(0.1)  # Échantillonnage à 10 Hz
         except KeyboardInterrupt:
-            print("\n⚠️  Interruption clavier détectée")
+            print("\n  Interruption clavier détectée")
         
         # Arrêt
         print("\n" + "="*60)
         print("🔌 Arrêt du Thymio...")
         th[id]["motor.left.target"] = 0
         th[id]["motor.right.target"] = 0
-        print("✅ Thymio arrêté avec succès")
+        print(" Thymio arrêté avec succès")
         print("="*60)
         
     except Exception as e:
-        print(f"\n❌ Erreur pendant l'exécution : {e}")
+        print(f"\n Erreur pendant l'exécution : {e}")
         print("\nArrêt du programme...")
         exit(1)

@@ -2,19 +2,12 @@
 
 # Fonction calculant la somme pondérée s
 def calculer_s(x1, x2, w0, w1, w2):
-    """
-    Calcule s = w0 + x1*w1 + x2*w2
-    """
     s = w0 + x1 * w1 + x2 * w2
     return s
 
 # Fonction d'activation retournant y
+
 def activation(s):
-    """
-    Fonction d'activation (seuil):
-    Si s >= 0, y = 1
-    Si s < 0, y = 0
-    """
     if s >= 0:
         y = 1
     else:
@@ -40,10 +33,6 @@ def tester_perceptron(w0, w1, w2, nom_operateur):
             y = activation(s)
             print(f"{x1:<5} {x2:<5} {s:<10.2f} {y:<5}")
 
-# Programme principal
-print("=" * 50)
-print("PERCEPTRON : IMPLANTATION DE PORTES LOGIQUES")
-print("=" * 50)
 
 # Opérateur OU (OR)
 # Pour OR: (0,0)→0, (0,1)→1, (1,0)→1, (1,1)→1
@@ -60,11 +49,3 @@ w0_and = -1.5
 w1_and = 1
 w2_and = 1
 tester_perceptron(w0_and, w1_and, w2_and, "ET (AND)")
-
-# Opérateur OU-Exclusif (XOR)
-# Note: Un perceptron simple ne peut pas implémenter XOR (non linéairement séparable)
-print("\n" + "=" * 50)
-print("NOTE: L'opérateur OU-Exclusif (XOR) ne peut pas être")
-print("implémenté avec un perceptron simple à une seule couche.")
-print("Il nécessite un perceptron multi-couches (MLP).")
-print("=" * 50)

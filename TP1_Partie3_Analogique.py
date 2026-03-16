@@ -23,7 +23,7 @@ import time
 # ================== CONFIGURATION ==================
 
 # Connexion série
-SERIAL_PORT = "COM3"
+SERIAL_PORT = "COM6"
 
 # Paramètres du perceptron analogique
 W1 = 1.0  # Poids de l'entrée (capteur avant)
@@ -182,16 +182,16 @@ def main():
     print("TP1 - Partie 3 : Perceptron Analogique à Une Entrée")
     print("="*60)
     print()
-    print("📋 Comportement :")
+    print(" Comportement :")
     print("  - Le robot RECULE quand un obstacle est détecté devant")
     print("  - Plus l'obstacle est proche, plus le robot recule vite")
     print("  - Réponse proportionnelle (analogique, pas tout-ou-rien)")
     print()
-    print("🎯 Test :")
+    print(" Test :")
     print("  - Approchez votre main du capteur AVANT du robot")
     print("  - Observez la vitesse de recul augmenter")
     print()
-    print("🛑 Arrêt : Bouton CENTRAL du Thymio ou Ctrl+C")
+    print(" Arrêt : Bouton CENTRAL du Thymio ou Ctrl+C")
     print("="*60)
     print()
     
